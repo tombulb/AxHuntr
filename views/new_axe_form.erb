@@ -1,0 +1,43 @@
+  
+<% if logged_in? %>
+  logged in as <%= current_user()['email']%>
+  <form action="/session" method="post">
+    <input type="hidden" name ="_method" value="delete">
+    <button>logout</button>
+  </form>
+<% else %>
+
+  <form action="/login">
+    <button>log in</button>
+  </form>
+
+  <form action="/new_user">
+    <button>sign up</button>
+  </form>
+
+<%end%>
+
+  
+  
+<form action="/new" method="post">
+  
+  <label for="">Model</label>
+  <input type="text" name="model">
+
+  <label for="rating">rating</label>
+  <select name="rating" id="rating">
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+  </select>
+
+  <label for="">image_url</label>
+  <input type="text" name="image_url">
+
+  <label for="">Post your review</label>
+  <input type="text" name="review" maxlength='800'>
+
+  <button>submit</button>
+</form>

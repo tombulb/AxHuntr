@@ -1,0 +1,58 @@
+
+<% if logged_in? %>
+  logged in as <%= current_user()['email']%>
+  
+   <form action="/account">
+    <button>account</button>
+  </form>
+
+  <form action="/session" method="post">
+    <input type="hidden" name ="_method" value="delete">
+    <button>logout</button>
+  </form>
+<% else %>
+
+  <form action="/login">
+    <button>log in</button>
+  </form>
+
+  <form action="/new_user">
+    <button>sign up</button>
+  </form>
+
+   
+
+
+<%end%>
+
+
+
+<div class="nav-wrapper">
+
+  <form action="/new_review">
+    <button>post a review</button>
+  </form>
+
+
+</div>
+
+<div class="review-wrapper">
+
+  <% user_reviews.each do |review| %>
+    <div class ="post" >
+      <img class="review-img" src="<%=review["image_url"]%>">
+      <h3><%= review["model"] %></h3>
+
+      <h4>Rating: <%= review["rating"] %></h4>
+      <p><%= review["review"] %></p>
+      <h5>Posted By: <%= review["user_email"] %></h5>
+    </div>
+  <% end %>
+
+</div>
+
+
+
+
+
+
