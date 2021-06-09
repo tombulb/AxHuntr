@@ -4,8 +4,13 @@ CREATE DATABASE axehunter
 
 CREATE TABLE users (
   id SERIAL PRIMARY KEY,
+  profile_name TEXT, 
   email TEXT,
-  password_digest TEXT
+  password_digest TEXT,
+  dob TEXT,
+  locale TEXT,
+  gear TEXT,
+  img_url TEXT
 );
 
 CREATE TABLE reviews (
@@ -16,6 +21,6 @@ CREATE TABLE reviews (
   img_url text,
   review varchar(800),
   user_id integer,
-  user_email text
+  author text
 );
 

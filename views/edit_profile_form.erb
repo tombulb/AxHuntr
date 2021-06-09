@@ -1,0 +1,35 @@
+<h2>hello</h2>
+
+<form action="/account/:profile_name/update_password">
+  <button>Update Password</button>
+</form>
+
+<label for="">Profile Picture</label>
+<%= cl_image_tag("#{user["img_url"]}", cloud_name: "diore1f83", :height=>200, :crop=>"scale")%>
+
+
+<form action="">
+  <button>Update Profile Pic</button>
+</form>
+
+<form action="/account/<%= user["id"] %>/edit" method="post">
+<input type="hidden" name="_method" value="put">
+  
+  <label for="">profile name</label>
+  <input type="text" name="profile_name" value="<%= user["profile_name"]%>">
+  
+  <label for="">email</label>
+  <input type="text" name="email" value="<%= user["email"]%>">
+
+  <label for="">Date of Birth</label>
+  <input type="text" name="dob" value="<%= user["dob"] %>">
+
+  <label for="">Location</label>
+  <input type="text" name="locale" value="<%= user["locale"]%>">
+
+  <label for="">Gear</label>
+  <textarea id="gear" name="gear" rows="8" cols="50" maxlength="800"></textarea>
+
+<button>Update</button>
+</form>
+

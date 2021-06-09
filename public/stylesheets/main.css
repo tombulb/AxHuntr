@@ -8,10 +8,22 @@ body {
   min-height: 100%;
 }
 
+/* user dash */
 
-.nav-wrapper {
+.curr-user {
   display: flex;
-  justify-content: space-around;
+  flex-direction: row;
+}
+
+.user-dash-btns {
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: space-between;
+  margin-left: 10px;
+}
+
+.user-logged {
+  color: yellowgreen;
 }
 
 /* User Account Page */
@@ -22,7 +34,12 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  
+}
+
+.post {
+  display: flex;
+  flex-direction: row;
+  justify-content:space-around
 }
 
 .new-review-form, .edit-review-form {

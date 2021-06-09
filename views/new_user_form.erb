@@ -1,12 +1,18 @@
-<h3>Enter your details below to sign up</h3>
+<h3><%= sign_up_msg %></h3>
 
-<form action="/users" method="post">
+<form action="/users" method="post" enctype="multipart/form-data">
+  
+  <label for="">profile name</label>
+  <input type="text" name="profile_name" required>
   
   <label for="">email</label>
   <input type="text" name="email" required>
 
   <label for="">password</label>
-  <input type="text" name="password" minlength="6" required>
+  <input type="text" name="password" minlength="6">
+
+  <label for="">avatar</label>
+  <input type="file" name="avatar" accept="image/*" >
 
 <button>submit</button>
 </form>

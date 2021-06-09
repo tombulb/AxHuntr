@@ -1,11 +1,21 @@
 <% if logged_in? %>
-  logged in as <%= current_user()['email']%>
-  <form action="/session" method="post">
-    <input type="hidden" name ="_method" value="delete">
-    <button>logout</button>
-  </form>
-<% else %>
+  <div class="curr-user">
+    <%= cl_image_tag("#{current_user()["img_url"]}", cloud_name: "diore1f83", :height=>75, :crop=>"scale") %>
+    
+    <div class="user-dash-btns">
+      <form action="/account/<%=current_user()['profile_name']%>/<%= current_user()['id']%>/edit">
+        <button>Edit Profile</button>
+      </form>
 
+      <form action="/session" method="post">
+        <input type="hidden" name ="_method" value="delete">
+        <button>logout</button>
+      </form>
+
+      <span class="user-logged"><%= current_user()['profile_name']%></span>
+    </div>
+  </div>
+<% else %>
   <form action="/login">
     <button>log in</button>
   </form>
@@ -13,7 +23,6 @@
   <form action="/new_user">
     <button>sign up</button>
   </form>
-
 <%end%>
 
 <div class="nav-wrapper">
@@ -31,23 +40,28 @@
   <% user_reviews.each do |review| %>
   
     <div class ="post" >
-      <h3><%= review["model"] %></h3>
-      <%= cl_image_tag("#{review['img_url']}", cloud_name: "diore1f83", :height=>250, :crop=>"scale") %>
-      
 
-      <h4>Rating: <%= review["rating"] %></h4>
-      <p><%= review["review"] %></p>
-      <h5>Posted By: <%= review['user_email'] %></h5>
-      <% if logged_in? %>
+      <%= cl_image_tag("#{review['img_url']}", cloud_name: "diore1f83", :height=>150, :crop=>"scale") %>
+    
+      <span>
+        <h3><%= review["model"] %></h3>
+        <h4>Rating: <%= review["rating"] %></h4>
+        <p><%= review["review"] %></p>
+      </span>
+
+      <span>
         <form action="/reviews/<%= review["id"]%>/edit">
-          <button>edit</button>
-        </form>
+          <button>edit post</button>
+        </form>      
         <form action="/review/<%=review["id"]%>" method="post">
           <input type="hidden" name="_method" value="delete">
-          <button>delete</button>
+          <button>delete post</button>
         </form>
-      <% end %>
+      </span>
+
     </div>
+
+   
   <% end %>
 
 </div>
