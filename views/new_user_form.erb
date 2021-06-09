@@ -1,12 +1,12 @@
+<h3>Enter your details below to sign up</h3>
+
 <form action="/users" method="post">
   
   <label for="">email</label>
-  <input type="text" name="email">
+  <input type="text" name="email" required>
 
   <label for="">password</label>
-  <input type="text" name="password">
+  <input type="text" name="password" minlength="6" required>
 
 <button>submit</button>
 </form>
-
-<p>at this stage if you try to sign up with an email that already exists in the database, you'll be redirected to the log in screen </p>

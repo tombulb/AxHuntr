@@ -2,6 +2,11 @@ require 'sinatra'
 require 'sinatra/reloader' if development?
 require 'bcrypt'
 require_relative 'db/helpers.rb'
+require 'active_support'
+require 'action_view'
+require 'cloudinary'
+include CloudinaryHelper
+
 
 enable :sessions
 
@@ -31,24 +36,38 @@ get '/' do
 end
 
 get '/login' do
+  login_error = "Please enter your login details below"
 
   #log in form. user inputs email and password. button to submti credentials.
 
-  erb :login_form
+  erb :login_form, locals: {login_error: login_error}
 
 end
 
 post '/session' do
 
+  
+
+
   user = run_sql("SELECT * FROM users WHERE email = '#{params["email"]}';")
 
-  if user.count > 0 && BCrypt::Password.new(user[0]["password_digest"]) == params["password"]
+  if user.count == 0
+    login_error = "That email doesn't exist, try again"
+  elsif BCrypt::Password.new(user[0]["password_digest"]) != params["password"]
+    login_error = "That password was incorrect, try again"
+  else
     logged_in = user[0] 
     session[:user_id] = logged_in["id"]
     redirect '/'
-  else
-    erb :login_form
   end
+
+  erb :login_form, locals: {login_error: login_error}
+
+  # if user.count > 0 && BCrypt::Password.new(user[0]["password_digest"]) == params["password"]
+    
+  # else
+  #   
+  # end
 
 
 end
@@ -81,7 +100,7 @@ post '/users' do
     user = run_sql("SELECT * FROM users WHERE email = '#{params["email"]}';")
     logged_in = user[0] 
     session[:user_id] = logged_in["id"]
-    redirect '/'
+    redirect '/user_created'
     
   else #if email found, redirects back to log in page
     redirect '/login'
@@ -89,13 +108,15 @@ post '/users' do
 
 end
 
+get '/user_created' do
+
+  erb :user_created
+
+end
+
 get '/account' do
 
-  if !logged_in?
-
-    redirect '/login'
-  
-  end
+  redirect '/login' if !logged_in?
 
   user_reviews = run_sql("SELECT * FROM reviews WHERE user_id = '#{session[:user_id]}';").reverse_each
 
@@ -105,33 +126,38 @@ end
 
 get '/new_review' do
 
-  if !logged_in?
-
-    redirect '/login'
-  
-  end
+  redirect '/login' if !logged_in?
 
   erb :new_axe_form
 
 end
 
+options = {
+  cloud_name: "diore1f83",
+  api_key: "713946916876186",
+  api_secret: "#{ENV['API_SECRET']}"
+}
+
 post '/new' do
 
   #verify data supplied by user is correct
-
+  res = Cloudinary::Uploader.upload(params['review_img']['tempfile'], options)
+  
   # if correct, insert into database
   run_sql("
   INSERT INTO reviews (
     model, 
     rating, 
-    image_url, 
+    img_name,
+    img_url, 
     review,
     user_id,
     user_email
     ) values (
       '#{params["model"]}',
       '#{params["rating"]}',
-      '#{params["image_url"]}',
+      '#{params["review_img"]["filename"]}',
+      '#{res["url"]}',
       '#{params["review"]}',
       '#{current_user()['id']}',
       '#{current_user()['email']}'
@@ -141,6 +167,41 @@ post '/new' do
   redirect '/account'
 
 end
+
+get '/reviews/:id/edit' do
+
+  res = run_sql("SELECT * FROM reviews WHERE id = '#{params["id"]}';")
+  review=res[0]
+
+  erb :edit_review_form, locals: {review: review}
+
+end
+
+put '/reviews/:id' do
+
+  run_sql("UPDATE reviews SET 
+    model='#{params["model"]}',
+    rating='#{params["rating"]}',
+    review='#{params["review"]}' 
+      WHERE id = #{params["id"]}
+  ")
+
+
+  redirect '/account'
+
+end
+
+
+delete '/review/:id' do
+
+  redirect '/login' if !logged_in?
+
+  delete_review = run_sql("DELETE FROM reviews WHERE id = '#{params["id"]}';")
+
+  redirect '/account'
+
+end
+
 
 get '/search' do
 

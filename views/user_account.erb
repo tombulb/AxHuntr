@@ -16,17 +16,37 @@
 
 <%end%>
 
+<div class="nav-wrapper">
+
+  <form action="/new_review">
+    <button>post a review</button>
+  </form>
+
+
+</div>
+
 
 <div class="review-wrapper">
 
   <% user_reviews.each do |review| %>
+  
     <div class ="post" >
-      <img class="review-img" src="<%=review["image_url"]%>">
       <h3><%= review["model"] %></h3>
+      <%= cl_image_tag("#{review['img_url']}", cloud_name: "diore1f83", :height=>250, :crop=>"scale") %>
+      
 
       <h4>Rating: <%= review["rating"] %></h4>
       <p><%= review["review"] %></p>
       <h5>Posted By: <%= review['user_email'] %></h5>
+      <% if logged_in? %>
+        <form action="/reviews/<%= review["id"]%>/edit">
+          <button>edit</button>
+        </form>
+        <form action="/review/<%=review["id"]%>" method="post">
+          <input type="hidden" name="_method" value="delete">
+          <button>delete</button>
+        </form>
+      <% end %>
     </div>
   <% end %>
 

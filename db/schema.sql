@@ -12,7 +12,8 @@ CREATE TABLE reviews (
   id SERIAL PRIMARY KEY,
   model text,
   rating integer,
-  image_url text,
+  img_name text,
+  img_url text,
   review varchar(800),
   user_id integer,
   user_email text

@@ -1,4 +1,4 @@
-  
+
 <% if logged_in? %>
   logged in as <%= current_user()['email']%>
   <form action="/session" method="post">
@@ -17,32 +17,29 @@
 
 <%end%>
 
-  
-<form action="/new" method="post" enctype="multipart/form-data">
-  <div class="new-review-form">  
-    
+
+
+<form action="/reviews/<%=review["id"]%>" method="post">
+  <input type="hidden" name="_method" value="put">
+  <div class="edit-review-form">
+
     <label for="">Model</label>
-    <input type="text" name="model" required>
+    <input type="text" name="model" value="<%= review["model"] %>">
 
     <label for="rating">Rating</label>
-    <select name="rating" id="rating" required>
-      <option value=""></option>
+    <select name="rating" id="rating">
+      <option value="<%=review["rating"]%>" selected><%=review["rating"]%></option>
       <option value="1">1</option>
       <option value="2">2</option>
       <option value="3">3</option>
       <option value="4">4</option>
       <option value="5">5</option>
     </select>
-
     
-
-    <label for="">image</label>
-    <input type="file" name="review_img" required>
-
-    <label for="review">Post your review</label>
+    <label for="">Post your review</label>
     <textarea id="review" name="review" rows="8" cols="50"></textarea>
-    <!--<input type="text" name="review" maxlength='800' required>-->
 
-    <button>submit</button>
+    <button>update</button>
+
   </div>
 </form>
