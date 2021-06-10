@@ -96,7 +96,7 @@ post '/users' do
         '#{params["profile_name"]}',
         '#{params["email"]}',
         '#{password_digest}',
-        'https://res.cloudinary.com/diore1f83/image/upload/v1623248774/wd5annkmnx1vulbyb9jq.png'
+        'https://res.cloudinary.com/diore1f83/image/upload/v1623248774/wd5annkmnx1vulbyb9jq.png' 
     );")
 
     user = run_sql("SELECT * FROM users WHERE email = '#{params["email"]}';")

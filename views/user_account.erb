@@ -38,18 +38,19 @@
 <div class="review-wrapper">
 
   <% user_reviews.each do |review| %>
-  
     <div class ="post" >
+      <%= cl_image_tag("#{review['img_url']}", :cloud_name=>"diore1f83", :class=>"review-thumb") %>
 
-      <%= cl_image_tag("#{review['img_url']}", cloud_name: "diore1f83", :height=>150, :crop=>"scale") %>
-    
-      <span>
+      <div class="review-text">
         <h3><%= review["model"] %></h3>
         <h4>Rating: <%= review["rating"] %></h4>
         <p><%= review["review"] %></p>
-      </span>
+      </div>
 
-      <span>
+      <div></div>
+
+
+      <div class="acc-post-form-wrap">
         <form action="/reviews/<%= review["id"]%>/edit">
           <button>edit post</button>
         </form>      
@@ -57,7 +58,7 @@
           <input type="hidden" name="_method" value="delete">
           <button>delete post</button>
         </form>
-      </span>
+      </div>
 
     </div>
 
