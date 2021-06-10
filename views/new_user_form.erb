@@ -1,18 +1,14 @@
-<h3><%= sign_up_msg %></h3>
+<h3 class="form-txt"><%= sign_up_msg %></h3>
 
-<form action="/users" method="post" enctype="multipart/form-data">
-  
-  <label for="">profile name</label>
-  <input type="text" name="profile_name" required>
-  
-  <label for="">email</label>
-  <input type="text" name="email" required>
-
-  <label for="">password</label>
-  <input type="text" name="password" minlength="6">
-
-  <label for="">avatar</label>
-  <input type="file" name="avatar" accept="image/*" >
-
-<button>submit</button>
+<form action="/users" method="post">
+  <div class="new-user-form">
+    <label class="form-txt" for="">PROFILE NAME</label>
+    <input type="text" name="profile_name" required>
+    <label class="form-txt" for="">EMAIL</label>
+    <input type="text" name="email" required>
+    <label class="form-txt" for="">PASSWORD</label>
+    <input type="text" name="password" minlength="6" placeholder="min. 6 characters">
+    <button>submit</button>
+  </div>
 </form>
+

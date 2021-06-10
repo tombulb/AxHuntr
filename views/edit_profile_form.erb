@@ -1,32 +1,67 @@
+<div>
+<% if logged_in? %>
+  <div class="curr-user">
+    <%= cl_image_tag("#{current_user()["img_url"]}", cloud_name: "diore1f83", :class=>"user-profile-pic", :height=>75, :crop=>"scale") %>
+    
+    <div class="user-dash-btns">
+      <span class="user-logged"><%= current_user()['profile_name']%></span>
 
+      <form action="/session" method="post">
+        <input type="hidden" name ="_method" value="delete">
+        <button>logout</button>
+      </form>
+
+      <form action="/account">
+        <button>Profile</button>
+      </form>
+
+
+    </div>
+  </div>
+<% else %>
+  <form action="/login">
+    <button>log in</button>
+  </form>
+
+  <form action="/new_user">
+    <button>sign up</button>
+  </form>
+<%end%>
 
 <form action="/account/<%= current_user['id'] %>/update_profile_pic">
   <button>Update Profile Pic</button>
 </form>
 
-<form action="/account/<%= current_user()['id'] %>/update_password">
-  <button>Update Password</button>
-</form>
+</div>
+
+
+
+
+
 
 
 <form action="/account/<%= user["id"] %>/edit" method="post">
 <input type="hidden" name="_method" value="put">
+
+<div class="edit-profile-form"> 
   
-  <label for="">profile name</label>
+  <label class="form-txt" for="">PROFILE NAME</label>
   <input type="text" name="profile_name" value="<%= user["profile_name"]%>">
   
-  <label for="">email</label>
+  <label class="form-txt" for="">EMAIL</label>
   <input type="text" name="email" value="<%= user["email"]%>">
 
-  <label for="">Date of Birth</label>
+  <label class="form-txt" for="">DATE OF BIRTH</label>
   <input type="text" name="dob" value="<%= user["dob"] %>">
 
-  <label for="">Location</label>
+  <label class="form-txt" for="">LOCATION</label>
   <input type="text" name="locale" value="<%= user["locale"]%>">
 
-  <label for="">Gear</label>
-  <textarea id="gear" name="gear" rows="8" cols="50" maxlength="800"></textarea>
+  <label class="form-txt" for="">GEAR</label>
+  <textarea id="gear" name="gear" rows="8" cols="50" maxlength="800"><%= user["gear"] %></textarea>
 
 <button>Update</button>
+
+</div>
 </form>
 

@@ -1,23 +1,23 @@
 
-<h3><%= login_msg %></h3>
+<h3 class="form-txt"><%= login_msg %></h3>
 
 
+<div class="login-form">
+  <form action="/login" method="post">
 
-<form action="/login" method="post">
+    <label class="form-txt" for="">EMAIL</label>
+    <input type="text" name="email">
 
-  <label for="">email</label>
-  <input type="text" name="email">
+    <label class="form-txt" for="">PASSWORD</label>
+    <input type="password" name="password">
 
-  <label for="">password</label>
-  <input type="password" name="password">
+    <button>login</button>
+  </form>
 
-  <button>login</button>
-</form>
+  <form action="/new_user">
+    <button>sign up</button>
+  </form>
+</div>
 
-<form action="/new_user">
-  <button>sign up</button>
-</form>
-
-<p>default login, email: def@def.com password: password</p>
 
 

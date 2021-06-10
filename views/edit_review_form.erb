@@ -23,7 +23,7 @@
   <input type="hidden" name="_method" value="put">
   <div class="edit-review-form">
 
-    <label for="">Model</label>
+    <label  for="">Model</label>
     <input type="text" name="model" value="<%= review["model"] %>">
 
     <label for="rating">Rating</label>
@@ -37,7 +37,7 @@
     </select>
     
     <label for="">Post your review</label>
-    <textarea id="review" name="review" rows="8" cols="50" maxlength="800" wrap="hard"><%=review["review"]%></textarea>
+    <textarea id="review" name="review" rows="8" cols="50" maxlength="800"><%=review["review"]%></textarea>
 
     <button>Update</button>
 

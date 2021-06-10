@@ -36,7 +36,7 @@ end
 
 get '/login' do
 
-  login_msg = "Please enter your login details below"
+  login_msg = "Enter your login details to sign in"
 
   erb :login_form, locals: {login_msg: login_msg}
 
@@ -120,8 +120,9 @@ get '/account' do
   redirect '/login' if !logged_in?
 
   user_reviews = run_sql("SELECT * FROM reviews WHERE user_id = '#{session[:user_id]}';").reverse_each
+  user = run_sql("SELECT * FROM users WHERE id = '#{current_user()["id"]}';")[0] 
 
-  erb :user_account, locals: {user_reviews: user_reviews}
+  erb :user_account, locals: {user_reviews: user_reviews, user: user}
 
 end
 

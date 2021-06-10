@@ -1,21 +1,25 @@
-
 <% if logged_in? %>
   <div class="curr-user">
-    <%= cl_image_tag("#{current_user()["img_url"]}", cloud_name: "diore1f83", :height=>75, :crop=>"scale") %>
+    <%= cl_image_tag("#{current_user()["img_url"]}", cloud_name: "diore1f83", :class=>"user-profile-pic", :height=>75, :crop=>"scale") %>
     
     <div class="user-dash-btns">
-      <form action="/account">
-        <button>Profile</button>
-      </form>
+      <span class="user-logged"><%= current_user()['profile_name']%></span>
 
       <form action="/session" method="post">
         <input type="hidden" name ="_method" value="delete">
         <button>logout</button>
       </form>
+      
+      <form action="/account">
+        <button>Profile</button>
+      </form>
 
-      <span class="user-logged"><%= current_user()['profile_name']%></span>
+
     </div>
   </div>
+  <form action="/account/<%= current_user()['id'] %>/update_profile_pic">
+    <button>Update Profile Pic</button>
+  </form>
 <% else %>
   <form action="/login">
     <button>log in</button>
@@ -26,14 +30,16 @@
   </form>
 <%end%>
 
+
+
 <div class="review-wrapper">
 
   <% user_reviews.each do |review| %>
     <div class ="post" >
       <%= cl_image_tag("#{review['img_url']}",:cloud_name=>"diore1f83", :class=>"review-thumb")%>
       <div class="review-text">
-        <h3><%= review["model"] %></h3>
-        <h4>Rating: <%= review["rating"] %></h4>
+        <p><%= review["model"] %></p>
+        <p>Rating: <%= review["rating"] %></p>
         <p><%= review["review"] %></p>
           
       </div>

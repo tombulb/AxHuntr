@@ -1,12 +1,26 @@
-  
 <% if logged_in? %>
-  logged in as <%= current_user()['email']%>
-  <form action="/session" method="post">
-    <input type="hidden" name ="_method" value="delete">
-    <button>logout</button>
+  <div class="curr-user">
+    <%= cl_image_tag("#{current_user()["img_url"]}", cloud_name: "diore1f83", :class=>"user-profile-pic", :height=>75, :crop=>"scale") %>
+    
+    <div class="user-dash-btns">
+      <span class="user-logged"><%= current_user()['profile_name']%></span>
+
+      <form action="/session" method="post">
+        <input type="hidden" name ="_method" value="delete">
+        <button>logout</button>
+      </form>
+
+      <form action="/account">
+        <button>Profile</button>
+      </form>
+
+
+    </div>
+  </div>
+  <form action="/account/<%= current_user()['id'] %>/update_profile_pic">
+    <button>Update Profile Pic</button>
   </form>
 <% else %>
-
   <form action="/login">
     <button>log in</button>
   </form>
@@ -14,17 +28,15 @@
   <form action="/new_user">
     <button>sign up</button>
   </form>
-
 <%end%>
-
   
 <form action="/new" method="post" enctype="multipart/form-data">
   <div class="new-review-form">  
     
-    <label for="">Model</label>
+    <label class="form-txt" for="">Model</label>
     <input type="text" name="model" required>
 
-    <label for="rating">Rating</label>
+    <label class="form-txt" for="rating">Rating</label>
     <select name="rating" id="rating" required>
       <option value=""></option>
       <option value="1">1</option>
@@ -36,10 +48,10 @@
 
     
 
-    <label for="">image</label>
+    <label class="form-txt" for="">image</label>
     <input type="file" name="review_img" accept="image/*" required>
 
-    <label for="review">Post your review</label>
+    <label class="form-txt" for="review">Post your review</label>
     <textarea id="review" name="review" rows="8" cols="50" maxlength="800" wrap="hard"></textarea>
 
     <button>submit</button>
