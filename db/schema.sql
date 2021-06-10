@@ -19,7 +19,7 @@ CREATE TABLE reviews (
   rating integer,
   img_name text,
   img_url text,
-  review varchar(800),
+  review varchar(1200),
   user_id integer,
   author text
 );

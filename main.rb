@@ -6,7 +6,7 @@ require 'active_support'
 require 'action_view'
 require 'cloudinary'
 include CloudinaryHelper
-
+require 'pry'
 
 enable :sessions
 
@@ -130,7 +130,7 @@ get '/new_review' do
 
   redirect '/login' if !logged_in?
 
-  erb :new_axe_form
+  erb :new_review_form
 
 end
 
