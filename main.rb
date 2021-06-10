@@ -158,7 +158,7 @@ post '/new' do
       '#{params["rating"]}',
       '#{params["review_img"]["filename"]}',
       '#{review_img["url"]}',
-      '#{params["review"]}',
+      '#{params["review"].gsub("'","''")}',
       '#{current_user()['id']}',
       '#{current_user()['profile_name']}'
     );
@@ -184,8 +184,8 @@ put '/account/:id/edit' do
     profile_name='#{params["profile_name"]}',
     email='#{params["email"]}',
     dob='#{params["dob"]}',
-    locale='#{params["locale"]}',
-    gear='#{params["gear"]}'
+    locale='#{params["locale"].gsub("'","''")}',
+    gear='#{params["gear"].gsub("'","''")}'
       WHERE id = #{params["id"]}
   ;")
 
@@ -272,7 +272,7 @@ put '/reviews/:id' do
   run_sql("UPDATE reviews SET 
     model='#{params["model"]}',
     rating='#{params["rating"]}',
-    review='#{params["review"]}' 
+    review='#{params["review"].gsub("'","''")}' 
       WHERE id = #{params["id"]}
   ;")
 
