@@ -6,7 +6,7 @@ require 'active_support'
 require 'action_view'
 require 'cloudinary'
 include CloudinaryHelper
-
+require 'pry'
 
 enable :sessions
 
@@ -137,7 +137,7 @@ end
 options = {
   cloud_name: "diore1f83",
   api_key: "713946916876186",
-  api_secret: "#{ENV['API_SECRET']}"
+  api_secret: "1MHVmkiKUOVNDaK8DhV9tZeikCs" #"#{ENV['API_SECRET']}"
 }
 
 post '/new' do
@@ -168,11 +168,11 @@ post '/new' do
 
 end
 
-get '/account/:profile_name/:id/edit' do
+get '/account/:id/edit_profile' do
 
-res = run_sql("SELECT * FROM users WHERE id = '#{params["id"]}';")
+user = run_sql("SELECT * FROM users WHERE id = '#{params["id"]}';")[0]
 
-user = res[0]
+
 
 erb :edit_profile_form, locals: {user: user}
 
@@ -194,11 +194,69 @@ put '/account/:id/edit' do
 
 end
 
-get '/account/:profile_name/update_password' do
+get '/account/:id/update_profile_pic' do
 
-  erb :update_password_form
+  user = run_sql("SELECT img_url FROM users WHERE id = '#{params["id"]}';")[0]
+
+  erb :update_avatar_form, locals: {user: user}
 
 end
+
+put '/account/:id/update_profile_pic' do
+
+  res = Cloudinary::Uploader.upload(params['avatar']['tempfile'], options)
+
+  run_sql("UPDATE users SET 
+    img_url='#{res["url"]}'
+      WHERE id = #{params["id"]}
+  ;")
+
+  redirect '/account'
+
+end
+
+get '/account/:id/update_password' do
+
+  user = run_sql("SELECT * FROM users WHERE id = '#{params["id"]}';")[0]
+
+  password_msg = "Update your password below"
+
+  erb :update_password_form, locals: {user: user, password_msg: password_msg}
+
+end
+
+put '/account/:id/update_password' do
+
+  user = run_sql("SELECT * FROM users WHERE id = '#{params["id"]}';")[0]
+
+  if BCrypt::Password.new(user["password_digest"]) != params["curr_password"]
+    password_msg = "current password incorrect"
+  elsif params["new_password"] != params["new_password_conf"]
+    password_msg = "new password doesn't match confirmation"
+  elsif params["new_password"] == params["curr_password"]
+    password_msg = "New password can't match current password"
+  else
+    password_digest = BCrypt::Password.create(params["new_password"])
+
+    run_sql("Update users SET
+      password_digest='#{password_digest}'
+      WHERE id = #{params["id"]};
+    ")
+
+    redirect '/password_updated'
+  end
+
+  erb :update_password_form, locals: {user: user, password_msg: password_msg}
+  
+
+end
+
+get '/password_updated' do
+
+  erb :password_updated
+
+end
+
 
 get '/reviews/:id/edit' do
 

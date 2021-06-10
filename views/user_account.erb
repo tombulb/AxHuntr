@@ -3,7 +3,7 @@
     <%= cl_image_tag("#{current_user()["img_url"]}", cloud_name: "diore1f83", :height=>75, :crop=>"scale") %>
     
     <div class="user-dash-btns">
-      <form action="/account/<%=current_user()['profile_name']%>/<%= current_user()['id']%>/edit">
+      <form action="/account/<%= current_user()['id']%>/edit_profile">
         <button>Edit Profile</button>
       </form>
 

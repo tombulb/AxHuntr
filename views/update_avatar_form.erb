@@ -1,0 +1,17 @@
+
+
+
+
+<label for="">Profile Picture</label>
+<%= cl_image_tag("#{user["img_url"]}", cloud_name: "diore1f83", :height=>200, :crop=>"scale")%>
+
+<form action="/account/<%= current_user()['id'] %>/update_profile_pic" method="post" enctype="multipart/form-data">
+<input type="hidden" name="_method" value="put">
+  
+
+  <label for="">avatar</label>
+  <input type="file" name="avatar" accept="image/*" required>
+  
+  <button>Update</button>
+
+</form>
