@@ -137,7 +137,7 @@ end
 options = {
   cloud_name: "diore1f83",
   api_key: "713946916876186",
-  api_secret: "#{ENV['API_SECRET']}" #"1MHVmkiKUOVNDaK8DhV9tZeikCs" 
+  api_secret: "#{ENV['API_SECRET']}" 
 }
 
 post '/new' do
