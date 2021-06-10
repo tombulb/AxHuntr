@@ -6,7 +6,6 @@ require 'active_support'
 require 'action_view'
 require 'cloudinary'
 include CloudinaryHelper
-require 'pry'
 
 enable :sessions
 
