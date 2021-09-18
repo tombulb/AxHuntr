@@ -67,7 +67,6 @@ h5 {
 }
 
 .post {
-  color: rgb(250, 204, 2);
   display: grid;
   grid-template-columns: 1fr 4fr;
   border-bottom: 5px solid #272727;
@@ -90,6 +89,7 @@ h5 {
 }
 
 .review-text {
+  color: rgb(250, 204, 2);
   margin: 15px;
 }
 
