@@ -4,7 +4,6 @@ html {
 
 body {
   background-color: #262626;
-  color: rgb(250, 204, 2);
   width: 80%;
   min-height: 100%;
   margin: 0 auto;
@@ -68,6 +67,7 @@ h5 {
 }
 
 .post {
+  color: rgb(250, 204, 2);
   display: grid;
   grid-template-columns: 1fr 4fr;
   border-bottom: 5px solid #272727;
