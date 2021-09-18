@@ -7,7 +7,6 @@ body {
   width: 80%;
   min-height: 100%;
   margin: 0 auto;
-  color: orange;
 }
 
 button {
@@ -68,7 +67,7 @@ h5 {
 }
 
 .post {
-  background-color: #c0bdbd;
+  background-color: whitesmoke;
   display: grid;
   grid-template-columns: 1fr 4fr;
   border-bottom: 5px solid #272727;
