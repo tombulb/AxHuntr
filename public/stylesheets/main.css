@@ -59,7 +59,7 @@ h5 {
 /* Home Page */
 
 .review-wrapper {
-  background-color: #c0bdbd;
+  background-color: #3e3e3e;
   max-width: 100%;
   margin-top: 15px;
   display: flex;
@@ -68,6 +68,7 @@ h5 {
 }
 
 .post {
+  background-color: #c0bdbd;
   display: grid;
   grid-template-columns: 1fr 4fr;
   border-bottom: 5px solid #272727;
