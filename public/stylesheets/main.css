@@ -68,7 +68,7 @@ h5 {
 }
 
 .post {
-  background-color: whitesmoke;
+  background-color: white;
   display: grid;
   grid-template-columns: 1fr 4fr;
   border-bottom: 5px solid #272727;
