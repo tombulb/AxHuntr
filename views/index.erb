@@ -38,9 +38,9 @@
     <div class ="post" >
       <%= cl_image_tag("#{review['img_url']}",:cloud_name=>"diore1f83", :class=>"review-thumb")%>
       <div class="review-text">
-        <p><%= review["model"] %></p>
-        <p>Rating: <%= review["rating"] %></p>
-        <p><%= review["review"] %></p>
+        <p class="review-content"><%= review["model"] %></p>
+        <p class="review-content">Rating: <%= review["rating"] %></p>
+        <p class="review-content"><%= review["review"] %></p>
           
       </div>
 

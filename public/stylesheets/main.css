@@ -18,10 +18,6 @@ h5 {
   margin: 0;
 }
 
-p {
-  color: orange;
-}
-
 .title-home-link {
   color:#87E000;
   text-decoration: underline;
@@ -94,6 +90,10 @@ p {
 
 .review-text {
   margin: 15px;
+}
+
+.review-content {
+  color: orange;
 }
 
 .author-wrap {
